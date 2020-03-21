@@ -2,22 +2,20 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// FIXME: webpack should change the hostname in development/production accordingly
+const hostUrl = "ec2-18-216-98-153.us-east-2.compute.amazonaws.com";
+
 function App() {
+  const getMessage = () => fetch(`http://${hostUrl}:3000/hello`)
+    .then((res) => res.text())
+    .then(console.log)
+    .catch(console.log);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={getMessage}>Fetch it!</button>
       </header>
     </div>
   );
