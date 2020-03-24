@@ -8,18 +8,14 @@ interface HomeProps extends RouteComponentProps {}
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   `
 
-export const Home:FC<HomeProps> = ( { location } ) => {
+export const Home:FC<HomeProps> = () => {
   return (
-    <>
-    <Container>
-      <h2>Home Page</h2>
-      <p>on path {location && location.href}</p>
+    <Container> 
       <Link to="/login">Go to Login</Link>
     </Container>
-    </>
 
   )
 }
