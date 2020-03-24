@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const port = 8000;
+
 const config = {
   entry: [
     'react-hot-loader/patch',
@@ -12,7 +14,11 @@ const config = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    host: 'localhost',
+    port: port,
+    historyApiFallback: true,
+    open: true
   },
   module: {
     rules: [
