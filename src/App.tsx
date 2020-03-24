@@ -1,15 +1,23 @@
-
-import * as React from 'react';
+import React, { FC } from 'react';
 import { hot } from "react-hot-loader/root";
-interface Props {
-   name: string
-}
+import { Router, Link } from '@reach/router';
+import { Home } from './Home/Home';
+import { Login } from './Login/Login';
 
-class App extends React.Component<Props> {
-  render() {
-    const { name } = this.props;
-    return <div>Hello {name}</div>;
-  }
+
+
+const App = () => {
+  return (
+    <>
+    <Link to="/">
+    <h1>Re COV eR</h1>
+    </Link>
+    <Router>
+      <Login path="/login"/>
+      <Home path="/"/>
+    </Router>
+    </>
+  )
 }
 
 export default hot(App);
