@@ -1,34 +1,29 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { hot } from "react-hot-loader/root";
-import { Router, Link } from '@reach/router';
-import { Home } from './Home';
-import { Login } from './Login';
-import styled from 'styled-components'
+import { Router } from '@reach/router';
+import { Landing } from './pages/landing';
+import Login  from './pages/login';
+import { Header } from './components/header';
+import Profile from './pages/profile'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { usersReducer } from './redux/reducers';
 
-const Heading = styled.h1`
-  display: flex;
-  justify-content: center;
-  color: lightgrey;
-  background-color:lightsalmon;
-  border: 2px solid black;
-  cursor: pointer;
-  `
+export const initialState = {activeUsers: ['default active user']};
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`
 const App = () => {
   return (
-    <>
-    <StyledLink to="/">
-    <Heading>Re COV eR</Heading>
-    </StyledLink>
-    <Router>
-      <Login path="/login"/>
-      <Home path="/"/>
-    </Router>
-    </>
+    <Provider store={store}>
+      <Header />
+      <Router>
+        <Landing path="/"/>
+        <Login path="/login"/>
+        <Profile path="/profile" />
+      </Router>
+    </Provider>
   )
 }
+
+const store = createStore(usersReducer);
 
 export default hot(App);
