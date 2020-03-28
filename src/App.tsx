@@ -1,15 +1,14 @@
-import React from 'react';
-import { hot } from "react-hot-loader/root";
-import { Router } from '@reach/router';
-import { Landing } from './pages/landing';
-import Login from './pages/login';
-import { Header } from './components/header';
-import Profile from './pages/profile'
 import { createStore } from 'redux';
+import { hot } from "react-hot-loader/root";
 import { Provider } from 'react-redux';
-import { usersReducer } from './redux/reducers';
+import { Router } from '@reach/router';
+import React from 'react';
 
-export const initialState = { activeUsers: ['default active user'] };
+import { Header } from './components/header';
+import { Landing } from './pages/landing';
+import { usersReducer } from './redux/reducers';
+import Login from './pages/login';
+import Profile from './pages/profile'
 
 const App = () => {
   return (
