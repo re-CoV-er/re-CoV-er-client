@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { hot } from "react-hot-loader/root";
 import { Provider } from 'react-redux';
 import { Router } from '@reach/router';
@@ -23,6 +24,6 @@ const App = () => {
   )
 }
 
-const store = createStore(usersReducer);
+const store = createStore(usersReducer, composeWithDevTools());
 
 export default hot(App);
