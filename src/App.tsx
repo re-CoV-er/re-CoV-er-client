@@ -1,34 +1,33 @@
-import React, { FC } from 'react';
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { hot } from "react-hot-loader/root";
-import { Router, Link } from '@reach/router';
-import { Home } from './Home';
-import { Login } from './Login';
-import styled from 'styled-components'
+import { Provider as Redux } from 'react-redux';
+import { Router } from '@reach/router';
+import { ApolloProvider as Apollo } from "@apollo/react-hooks";
+import React from 'react';
 
-const Heading = styled.h1`
-  display: flex;
-  justify-content: center;
-  color: lightgrey;
-  background-color:lightsalmon;
-  border: 2px solid black;
-  cursor: pointer;
-  `
+import { Header } from './components/header';
+import { Landing } from './pages/landing';
+import { usersReducer } from './redux/reducers';
+import Signup from './pages/signup';
+import Profile from './pages/profile'
+import client from './graphql/client';
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`
 const App = () => {
   return (
-    <>
-    <StyledLink to="/">
-    <Heading>Re COV eR</Heading>
-    </StyledLink>
-    <Router>
-      <Login path="/login"/>
-      <Home path="/"/>
-    </Router>
-    </>
+    <Redux store={store}>
+      <Apollo client={client}>
+        <Header />
+        <Router>
+          <Landing path="/" />
+          <Signup path="/signup" />
+          <Profile path="/profile" />
+        </Router>
+      </Apollo>
+    </Redux>
   )
 }
+
+const store = createStore(usersReducer, composeWithDevTools());
 
 export default hot(App);
