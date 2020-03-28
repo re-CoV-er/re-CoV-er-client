@@ -8,7 +8,7 @@ import React from 'react';
 import { Header } from './components/header';
 import { Landing } from './pages/landing';
 import { usersReducer } from './redux/reducers';
-import Login from './pages/login';
+import Signup from './pages/signup';
 import Profile from './pages/profile'
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
       <Header />
       <Router>
         <Landing path="/" />
-        <Login path="/login" />
+          <Signup path="/signup" />
         <Profile path="/profile" />
       </Router>
     </Provider>
