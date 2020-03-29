@@ -14,9 +14,6 @@ const Profile: FC<ProfileProps> = () => {
         }`;
 
     const { data, loading, error } = useQuery(whoAmI);
-    console.log(data);
-    console.log(loading);
-    console.log(error);
 
     return (
         <>

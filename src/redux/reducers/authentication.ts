@@ -1,28 +1,17 @@
-import {
-  SIGN_UP_PENDING,
-  SIGN_UP_SUCCESS,
-  SIGN_UP_FAILURE,
-} from "../constants";
+import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from "../constants";
 import { AnyAction } from "redux";
-
-interface KnownUser {
-  loading: false;
-  loggedIn: true;
-  userDetails: UserDetails;
-  accessToken: string;
-}
-
-interface UnknownUser {
-  loading: boolean;
-  loggedIn: false;
-}
 
 interface UserDetails {
   displayName: string;
   email: string;
 }
 
-type AuthorizationState = KnownUser | UnknownUser;
+export interface AuthorizationState {
+  loading: boolean;
+  loggedIn: boolean;
+  userDetails?: UserDetails;
+  accessToken?: string;
+}
 
 const initialState: AuthorizationState = {
   loading: false,
@@ -34,7 +23,7 @@ export const authentication = (
   action: AnyAction
 ) => {
   switch (action.type) {
-    case SIGN_UP_PENDING:
+    case SIGN_UP:
       return { ...state, loading: true };
     case SIGN_UP_SUCCESS:
       return {

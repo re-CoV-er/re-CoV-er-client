@@ -1,16 +1,18 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { authentication } from '../redux/action-creators';
+import { Dispatch } from 'redux';
+import { AuthorizationState } from '../redux/reducers/authentication';
 
-interface OwnProps extends RouteComponentProps { }
+type OwnProps = RouteComponentProps;
 
-interface StateProps {
-  users: string[]
-}
+type StateProps = {
+  authentication: AuthorizationState
+};
 
 interface DispatchProps {
   signUp: (email: string, password: string) => void
@@ -19,9 +21,9 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps & OwnProps
 
 const Container = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Signup: FC<Props> = (props) => {
@@ -36,6 +38,8 @@ const Signup: FC<Props> = (props) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => { props.authentication.loggedIn && navigate("/profile") })
 
   return (
     <Container>
@@ -57,20 +61,21 @@ const Signup: FC<Props> = (props) => {
 
       />
       <br />
+
       <Button variant="contained" color="primary" onClick={() => {
         props.signUp(email, password)
       }}>
-        Sign up
-    </Button>
+        {props.authentication.loading ? "loading" : "Sign up"}
+      </Button>
     </Container>
   )
 };
 
-const mapStateToProps = (state: any) => { return state };
-const mapDispatchToProps = (dispatch: any) => ({
+const mapStateToProps = (state: StateProps): StateProps => state;
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   signUp(email: string, password: string) {
     dispatch(authentication.signUp({ email, password }))
   }
 })
 
-export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(Signup)
+export default connect<StateProps, DispatchProps, OwnProps, StateProps>(mapStateToProps, mapDispatchToProps)(Signup)
