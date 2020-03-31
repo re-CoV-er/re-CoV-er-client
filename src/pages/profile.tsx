@@ -5,11 +5,21 @@ import gql from 'graphql-tag';
 import { connect } from 'react-redux';
 interface ProfileProps extends RouteComponentProps { }
 
-const Profile: FC<ProfileProps> = (props: any) => {
+const Profile: FC<ProfileProps> = () => {
+    const whoAmI = gql`
+        {
+            whoAmI {
+                username
+                email
+            }
+        }`;
+
+    const { data, loading, error } = useQuery(whoAmI);
+
     return (
         <>
             <h2>Profile</h2>
-            <p>{props.authentication.accessToken}</p>
+            <p>{JSON.stringify(data)}</p>
         </>
 
     )
