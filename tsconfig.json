@@ -12,6 +12,10 @@
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
         "skipLibCheck": true,
+        "lib": [
+            "ES2020",
+            "dom"
+        ]
     },
     "include": [
         "./src/**/*"
