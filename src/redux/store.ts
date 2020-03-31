@@ -7,7 +7,7 @@ import { authenticationEpic } from "./epics/authentication";
 
 const epicMiddleware = createEpicMiddleware();
 
-export default function configureStore() {
+export function configureStore() {
   const composedEnhancers = composeWithDevTools(
     applyMiddleware(epicMiddleware)
   );
@@ -18,3 +18,5 @@ export default function configureStore() {
 
   return store;
 }
+
+export default configureStore();
