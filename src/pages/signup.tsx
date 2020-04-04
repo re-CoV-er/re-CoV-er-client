@@ -15,7 +15,7 @@ type StateProps = {
 };
 
 interface DispatchProps {
-  signUp: (email: string, password: string) => void
+  signUp: (username: string, email: string, password: string) => void
 }
 
 type Props = StateProps & DispatchProps & OwnProps
@@ -27,6 +27,11 @@ const Container = styled.div`
 `;
 
 const Signup: FC<Props> = (props) => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setEmail(event.target.value)
@@ -35,23 +40,32 @@ const Signup: FC<Props> = (props) => {
     event.preventDefault();
     setPassword(event.target.value)
   };
+  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setUsername(event.target.value)
+  };
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   useEffect(() => { props.authentication.loggedIn && navigate("/profile") })
 
   return (
     <Container>
       <TextField
-        id="name"
+        id="username"
+        value={username}
+        label="Username"
+        margin="normal"
+        type="text"
+        onChange={handleUsernameChange}
+      />
+      <TextField
+        id="email"
         value={email}
         label="E-Mail"
         margin="normal"
-        type="text"
+        type="email"
         onChange={handleEmailChange}
       />
-      <br />
       <TextField
         id="password"
         label="Password"
@@ -63,7 +77,7 @@ const Signup: FC<Props> = (props) => {
       <br />
 
       <Button variant="contained" color="primary" onClick={() => {
-        props.signUp(email, password)
+        props.signUp(username, email, password)
       }}>
         {props.authentication.loading ? "loading" : "Sign up"}
       </Button>
@@ -73,8 +87,8 @@ const Signup: FC<Props> = (props) => {
 
 const mapStateToProps = (state: StateProps): StateProps => state;
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  signUp(email: string, password: string) {
-    dispatch(authentication.signUp({ email, password }))
+  signUp(username, email, password) {
+    dispatch(authentication.signUp({ username, email, password }))
   }
 })
 
