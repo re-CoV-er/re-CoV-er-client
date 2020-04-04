@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
-import { signupEpic } from "../epics/signup";
-import { loginEpic } from "../epics/login"
+import { signupEpic, loginEpic } from "../epics";
 import { authentication as authenticationReducer } from "../reducers/authentication";
 
 import { combineEpics } from "redux-observable";
