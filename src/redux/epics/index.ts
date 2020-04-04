@@ -1,1 +1,1 @@
-export { authenticationEpic } from "./authentication";
+export { signupEpic } from "./signup";

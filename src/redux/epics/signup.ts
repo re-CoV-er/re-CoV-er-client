@@ -6,7 +6,7 @@ import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from "../constants";
 import client from "../../graphql/client";
 import { signUp } from "../../graphql/authentication";
 
-export const authenticationEpic: Epic = (action: Observable<SignUpAction>) => {
+export const signupEpic: Epic = (action: Observable<SignUpAction>) => {
   return action.pipe(
     ofType(SIGN_UP),
     mergeMap((currentAction: SignUpAction) => {
