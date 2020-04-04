@@ -17,7 +17,7 @@ export const authenticationEpic: Epic = (action: Observable<SignUpAction>) => {
             signInInput: {
               email: currentAction.payload.email,
               password: currentAction.payload.password,
-              username: "currentAction.payload.username",
+              username: currentAction.payload.username,
             },
           },
         })
@@ -35,7 +35,7 @@ export const authenticationEpic: Epic = (action: Observable<SignUpAction>) => {
         delay(500)
       );
     }),
-    catchError(error => {
+    catchError(_error => {
       return Promise.resolve({
         type: SIGN_UP_FAILURE,
       });
