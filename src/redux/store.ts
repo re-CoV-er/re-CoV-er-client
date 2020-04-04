@@ -3,8 +3,7 @@ import { createEpicMiddleware } from "redux-observable";
 import { composeWithDevTools } from "redux-devtools-extension";
 import throttle from "lodash.throttle";
 
-import { reducer } from "./reducers";
-import { authenticationEpic } from "./epics/authentication";
+import { reducer, rootEpic } from "./reducers";
 import persist from "../utils/persist";
 
 const epicMiddleware = createEpicMiddleware();
@@ -16,7 +15,7 @@ export function configureStore() {
 
   const store = createStore(reducer, persist.loadState(), composedEnhancers);
 
-  epicMiddleware.run(authenticationEpic);
+  epicMiddleware.run(rootEpic);
 
   return store;
 }
