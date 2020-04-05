@@ -1,4 +1,4 @@
-import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from "../constants";
+import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN, LOG_IN_FAILURE, LOG_IN_SUCCESS } from "../constants";
 import { AnyAction } from "redux";
 
 interface UserDetails {
@@ -34,6 +34,21 @@ export const authentication = (
         userDetails: action.payload.userDetails,
       };
     case SIGN_UP_FAILURE:
+      return {
+        loading: false,
+        loggedIn: false,
+      };
+    case LOG_IN:
+      return { ...state, loading: true };
+    case LOG_IN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loggedIn: true,
+        accessToken: action.payload.accessToken,
+        userDetails: action.payload.userDetails,
+      };
+    case LOG_IN_FAILURE:
       return {
         loading: false,
         loggedIn: false,

@@ -1,21 +1,20 @@
 import { map, mergeMap, catchError, delay } from "rxjs/operators";
 import { Observable, from } from "rxjs";
-import { SignUpAction } from "../action-creators/authentication";
+import { LogInAction } from "../action-creators/authentication";
 import { ofType, Epic } from "redux-observable";
-import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from "../constants";
+import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_FAILURE } from "../constants";
 import client from "../../graphql/client";
-import { signUp } from "../../graphql/authentication";
+import { logIn } from "../../graphql/authentication";
 
-export const authenticationEpic: Epic = (action: Observable<SignUpAction>) => {
+export const loginEpic: Epic = (action: Observable<LogInAction>) => {
   return action.pipe(
-    ofType(SIGN_UP),
-    mergeMap((currentAction: SignUpAction) => {
+    ofType(LOG_IN),
+    mergeMap((currentAction: LogInAction) => {
       return from(
-        client.mutate<{ createUser: { accessToken: string } }>({
-          mutation: signUp,
+        client.query<{ logIn: { accessToken: string } }>({
+          query: logIn,
           variables: {
-            signInInput: {
-              email: currentAction.payload.email,
+            logInInput: {
               password: currentAction.payload.password,
               username: currentAction.payload.username,
             },
@@ -24,9 +23,9 @@ export const authenticationEpic: Epic = (action: Observable<SignUpAction>) => {
       ).pipe(
         map(response => {
           return {
-            type: SIGN_UP_SUCCESS,
+            type: LOG_IN_SUCCESS,
             payload: {
-              accessToken: response.data?.createUser.accessToken,
+              accessToken: response.data?.logIn.accessToken,
               loading: false,
               loggedIn: true,
             },
@@ -37,7 +36,7 @@ export const authenticationEpic: Epic = (action: Observable<SignUpAction>) => {
     }),
     catchError(_error => {
       return Promise.resolve({
-        type: SIGN_UP_FAILURE,
+        type: LOG_IN_FAILURE,
       });
     })
   );

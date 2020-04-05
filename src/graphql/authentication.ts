@@ -7,3 +7,11 @@ export const signUp = gql`
     }
   }
 `;
+
+export const logIn = gql`
+  query LogIn($logInInput: LogInInput!) {
+    logIn(input: $logInInput) {
+      accessToken
+    }
+  }
+  `;
