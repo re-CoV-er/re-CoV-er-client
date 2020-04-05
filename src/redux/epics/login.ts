@@ -29,9 +29,7 @@ export const loginEpic: Epic = (
           return {
             type: LOG_IN_SUCCESS,
             payload: {
-              accessToken: response.data?.logIn.accessToken,
-              loading: false,
-              loggedIn: true,
+              accessToken: response.data?.logIn?.accessToken,
             },
           };
         }),
