@@ -12,12 +12,12 @@ export interface LogInCredentials {
   password: string;
 }
 export interface SignUpAction {
-  type: "SIGN_UP";
+  type: typeof SIGN_UP;
   payload: SignUpCredentials;
 }
 
 export interface LogInAction {
-  type: "LOG_IN";
+  type: typeof LOG_IN;
   payload: LogInCredentials;
 }
 
