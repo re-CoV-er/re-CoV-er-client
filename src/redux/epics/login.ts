@@ -25,7 +25,7 @@ export const loginEpic: Epic = (
           },
         })
       ).pipe(
-        map(response => {
+        map((response) => {
           return {
             type: LOG_IN_SUCCESS,
             payload: {
@@ -38,7 +38,7 @@ export const loginEpic: Epic = (
         delay(500)
       );
     }),
-    catchError(_error => {
+    catchError((_error) => {
       return Promise.resolve({
         type: LOG_IN_FAILURE,
       });

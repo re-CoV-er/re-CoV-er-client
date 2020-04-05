@@ -26,7 +26,7 @@ export const signupEpic: Epic = (
           },
         })
       ).pipe(
-        map(response => {
+        map((response) => {
           return {
             type: SIGN_UP_SUCCESS,
             payload: {
@@ -39,7 +39,7 @@ export const signupEpic: Epic = (
         delay(500)
       );
     }),
-    catchError(_error => {
+    catchError((_error) => {
       return Promise.resolve({
         type: SIGN_UP_FAILURE,
       });
