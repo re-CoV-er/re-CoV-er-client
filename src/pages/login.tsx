@@ -66,7 +66,7 @@ const Login: FC<Props> = (props) => {
       <Button variant="contained" color="primary" onClick={() => {
         props.logIn(username, password)
       }}>
-        {props.authentication.loading ? "loading" : "Sign up"}
+        {props.authentication.loading ? "loading" : "Login"}
       </Button>
     </Container>
   )

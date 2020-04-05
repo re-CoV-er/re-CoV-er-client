@@ -39,7 +39,6 @@ export const authentication = (
         loggedIn: false,
       };
     case LOG_IN:
-      console.log('LOADING')
       return { ...state, loading: true };
     case LOG_IN_SUCCESS:
       return {
@@ -48,6 +47,11 @@ export const authentication = (
         loggedIn: true,
         accessToken: action.payload.accessToken,
         userDetails: action.payload.userDetails,
+      };
+    case LOG_IN_FAILURE:
+      return {
+        loading: false,
+        loggedIn: false,
       };
     default:
       return { ...state };
