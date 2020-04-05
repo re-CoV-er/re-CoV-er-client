@@ -4,8 +4,6 @@ import { Provider as Redux } from 'react-redux';
 import { Router } from '@reach/router';
 import { ApolloProvider as Apollo } from "@apollo/react-hooks";
 import React from 'react';
-
-import { Header } from './components/header';
 import { Landing } from './pages/landing';
 import Signup from './pages/signup';
 import Login from './pages/login';
@@ -16,7 +14,6 @@ const App = () => {
   return (
     <Redux store={store}>
       <Apollo client={client}>
-        <Header />
         <Router>
           <Landing path="/" />
           <Signup path="/signup" />
