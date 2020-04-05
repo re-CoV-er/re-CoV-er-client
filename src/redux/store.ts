@@ -1,12 +1,20 @@
 import { createStore, applyMiddleware } from "redux";
 import { createEpicMiddleware } from "redux-observable";
 import { composeWithDevTools } from "redux-devtools-extension";
+import ApolloClient from "apollo-client";
+import client from "../graphql/client";
 import throttle from "lodash.throttle";
 
 import { reducer, rootEpic } from "./reducers";
 import persist from "../utils/persist";
 
-const epicMiddleware = createEpicMiddleware();
+export interface EpicDependencies {
+  client: ApolloClient<unknown>;
+}
+
+const epicMiddleware = createEpicMiddleware({
+  dependencies: { client },
+});
 
 export function configureStore() {
   const composedEnhancers = composeWithDevTools(

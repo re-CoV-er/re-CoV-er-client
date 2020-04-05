@@ -3,10 +3,14 @@ import { Observable, from } from "rxjs";
 import { SignUpAction } from "../action-creators/authentication";
 import { ofType, Epic } from "redux-observable";
 import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from "../constants";
-import client from "../../graphql/client";
 import { signUp } from "../../graphql/authentication";
+import { EpicDependencies } from "../store";
 
-export const signupEpic: Epic = (action: Observable<SignUpAction>) => {
+export const signupEpic: Epic = (
+  action: Observable<SignUpAction>,
+  _state,
+  { client }: EpicDependencies
+) => {
   return action.pipe(
     ofType(SIGN_UP),
     mergeMap((currentAction: SignUpAction) => {
@@ -22,7 +26,7 @@ export const signupEpic: Epic = (action: Observable<SignUpAction>) => {
           },
         })
       ).pipe(
-        map(response => {
+        map((response) => {
           return {
             type: SIGN_UP_SUCCESS,
             payload: {
@@ -35,7 +39,7 @@ export const signupEpic: Epic = (action: Observable<SignUpAction>) => {
         delay(500)
       );
     }),
-    catchError(_error => {
+    catchError((_error) => {
       return Promise.resolve({
         type: SIGN_UP_FAILURE,
       });

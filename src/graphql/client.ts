@@ -11,11 +11,11 @@ const httpLink = new HttpLink({
 const authLink = setContext((_, { headers }) => {
   const state = store.getState();
   const token = state.authentication.accessToken;
-  console.log(state);
+
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "merda pudenta",
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
