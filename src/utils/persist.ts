@@ -1,6 +1,6 @@
-import { AuthorizationState } from "../redux/reducers/authentication";
+import { AuthenticationState } from "../redux/reducers/authentication";
 
-export class PersistState<State = { authentication: AuthorizationState }> {
+export class PersistState<State = { authentication: AuthenticationState }> {
   constructor(private readonly strategy: LocalStrategy) {}
   public loadState = () => {
     try {

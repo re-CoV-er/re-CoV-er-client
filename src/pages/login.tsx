@@ -6,12 +6,12 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { authentication } from '../redux/action-creators';
 import { Dispatch } from 'redux';
-import { AuthorizationState } from '../redux/reducers/authentication';
+import { AuthenticationState } from '../redux/reducers/authentication';
 
 type OwnProps = RouteComponentProps;
 
 type StateProps = {
-  authentication: AuthorizationState
+  authentication: AuthenticationState
 };
 
 interface DispatchProps {

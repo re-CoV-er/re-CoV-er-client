@@ -6,20 +6,20 @@ interface UserDetails {
   email: string;
 }
 
-export interface AuthorizationState {
+export interface AuthenticationState {
   loading: boolean;
   loggedIn: boolean;
   userDetails?: UserDetails;
   accessToken?: string;
 }
 
-const initialState: AuthorizationState = {
+const initialState: AuthenticationState = {
   loading: false,
   loggedIn: false,
 };
 
 export const authentication = (
-  state: AuthorizationState = initialState,
+  state: AuthenticationState = initialState,
   action: AnyAction
 ) => {
   switch (action.type) {
