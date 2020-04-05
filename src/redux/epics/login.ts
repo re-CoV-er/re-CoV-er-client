@@ -11,7 +11,7 @@ export const loginEpic: Epic = (action: Observable<LogInAction>) => {
     ofType(LOG_IN),
     mergeMap((currentAction: LogInAction) => {
       return from(
-        client.query<any>({
+        client.query<{ logIn: { accessToken: string } }>({
           query: logIn,
           variables: {
             logInInput: {
