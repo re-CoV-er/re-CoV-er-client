@@ -3,10 +3,14 @@ import { Observable, from } from "rxjs";
 import { LogInAction } from "../action-creators/authentication";
 import { ofType, Epic } from "redux-observable";
 import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_FAILURE } from "../constants";
-import client from "../../graphql/client";
 import { logIn } from "../../graphql/authentication";
+import { EpicDependencies } from "../store";
 
-export const loginEpic: Epic = (action: Observable<LogInAction>) => {
+export const loginEpic: Epic = (
+  action: Observable<LogInAction>,
+  _,
+  { client }: EpicDependencies
+) => {
   return action.pipe(
     ofType(LOG_IN),
     mergeMap((currentAction: LogInAction) => {
