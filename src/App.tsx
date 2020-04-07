@@ -6,7 +6,10 @@ import { ApolloProvider as Apollo } from "@apollo/react-hooks";
 import React from 'react';
 
 import { Header } from './components/header';
+import { Buttons } from './components/buttons';
+
 import { Landing } from './pages/landing';
+
 import Signup from './pages/signup';
 import Profile from './pages/profile'
 import client from './graphql/client';
@@ -18,6 +21,7 @@ const App = () => {
     <Redux store={store}>
       <Apollo client={client}>
         <Header />
+        <Buttons />
         <Router>
           <Landing path="/" />
           <Signup path="/signup" />
