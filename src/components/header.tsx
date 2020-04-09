@@ -6,19 +6,19 @@ const Heading = styled.h1`
   display: flex;
   justify-content: center;
   color: lightgrey;
-  background-color:seagreen;
+  background-color: seagreen;
   border: 2px solid black;
   cursor: pointer;
-  `
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`
+`;
 
 export const Header = () => {
-    return (
-        <StyledLink to="/">
-            <Heading>Re CoV eR</Heading>
-        </StyledLink>
-    )
-}
+  return (
+    <StyledLink to="/">
+      <Heading>Re CoV eR</Heading>
+    </StyledLink>
+  );
+};

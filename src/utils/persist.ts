@@ -1,10 +1,10 @@
-import { AuthenticationState } from "../redux/reducers/authentication";
+import { AuthenticationState } from '../redux/reducers/authentication';
 
 export class PersistState<State = { authentication: AuthenticationState }> {
   constructor(private readonly strategy: LocalStrategy) {}
   public loadState = () => {
     try {
-      const serializedState = this.strategy.get("state");
+      const serializedState = this.strategy.get('state');
       if (serializedState == null) return undefined;
       return JSON.parse(serializedState);
     } catch (error) {
@@ -15,7 +15,7 @@ export class PersistState<State = { authentication: AuthenticationState }> {
   public saveState = (state: State) => {
     try {
       const serializedState = JSON.stringify(state);
-      this.strategy.set("state", serializedState);
+      this.strategy.set('state', serializedState);
     } catch (error) {
       console.error(error);
     }

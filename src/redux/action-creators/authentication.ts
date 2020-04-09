@@ -1,5 +1,5 @@
-import { SIGN_UP, LOG_IN } from "../constants";
-import { ActionCreator } from "redux";
+import { SIGN_UP, LOG_IN } from '../constants';
+import { ActionCreator } from 'redux';
 
 export interface SignUpCredentials {
   username: string;
@@ -22,16 +22,15 @@ export interface LogInAction {
 }
 
 export const signUp: ActionCreator<SignUpAction> = (
-  credentials: SignUpCredentials
+  credentials: SignUpCredentials,
 ) => ({
   type: SIGN_UP,
   payload: credentials,
 });
 
 export const logIn: ActionCreator<LogInAction> = (
-  credentials: LogInCredentials
+  credentials: LogInCredentials,
 ) => ({
   type: LOG_IN,
   payload: credentials,
 });
-

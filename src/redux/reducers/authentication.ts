@@ -1,5 +1,12 @@
-import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN, LOG_IN_FAILURE, LOG_IN_SUCCESS } from "../constants";
-import { AnyAction } from "redux";
+import {
+  SIGN_UP,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  LOG_IN,
+  LOG_IN_FAILURE,
+  LOG_IN_SUCCESS,
+} from '../constants';
+import { AnyAction } from 'redux';
 
 interface UserDetails {
   displayName: string;
@@ -20,7 +27,7 @@ const initialState: AuthenticationState = {
 
 export const authentication = (
   state: AuthenticationState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case SIGN_UP:
