@@ -12,7 +12,7 @@
     "build-prod": "webpack -p --mode production",
     "start": "webpack-dev-server --hot --mode development",
     "test": "jest",
-    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
