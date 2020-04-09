@@ -25,9 +25,9 @@ export const Landing: FC<LandingProps> = () => {
         is crushed, etc.
       </p>
       <p>
-        Now, if we're all gonna end up under lockdown in one form or another,
+        Now, if we’re all gonna end up under lockdown in one form or another,
         those of us who can still work will continue to earn almost as usual,
-        while we won't be spending much at all.
+        while we won’t be spending much at all.
       </p>
       <p>
         At the same time, those us us who cannot work have lots of time on their
