@@ -10,7 +10,7 @@ module.exports = {
         ecmaFeatures: {
             jsx: true
         },
-        ecmaVersion: "ESNEXT",
+        ecmaVersion: 2020,
         sourceType: "module"
     },
     settings: {
@@ -19,6 +19,15 @@ module.exports = {
         }
     },
     rules: {
-        "react/prop-types": 0
+        "react/prop-types": 0,
+        '@typescript-eslint/no-unused-vars': [
+            'error',
+            {
+                "ignoreRestSiblings": true,
+                "varsIgnorePattern": "^_.*",
+                "argsIgnorePattern": "^_.*",
+                "args": "after-used"
+            }
+        ],
     }
 };
