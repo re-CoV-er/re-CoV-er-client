@@ -57,7 +57,7 @@ const config = {
         include: /\.module\.css$/
       },
       {
-        test: /\.svg$/,
+        test: /\.(svg|woff|woff2|ttf|eot)$/,
         use: 'file-loader'
       },
       {
