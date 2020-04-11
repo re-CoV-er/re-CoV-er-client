@@ -1,12 +1,17 @@
 import React, { FC } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { Link } from '@reach/router';
+import styled from 'styled-components';
 
 type LandingProps = RouteComponentProps;
 
+const TypoH1 = styled.section`
+  font-family: 'Viminalis';
+`;
+
 export const Landing: FC<LandingProps> = () => {
   return (
-    <>
+    <TypoH1>
       <h1>re-CoV-er: Infectiously Human</h1>
 
       <p>
@@ -64,6 +69,6 @@ export const Landing: FC<LandingProps> = () => {
       </p>
 
       <Link to="/signup">Go to Signup</Link>
-    </>
+    </TypoH1>
   );
 };
