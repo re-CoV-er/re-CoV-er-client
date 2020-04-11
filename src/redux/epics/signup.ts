@@ -1,15 +1,15 @@
-import { map, mergeMap, catchError, delay } from "rxjs/operators";
-import { Observable, from } from "rxjs";
-import { SignUpAction } from "../action-creators/authentication";
-import { ofType, Epic } from "redux-observable";
-import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from "../constants";
-import { signUp } from "../../graphql/authentication";
-import { EpicDependencies } from "../store";
+import { map, mergeMap, catchError, delay } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { SignUpAction } from '../action-creators/authentication';
+import { ofType, Epic } from 'redux-observable';
+import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from '../constants';
+import { signUp } from '../../graphql/authentication';
+import { EpicDependencies } from '../store';
 
 export const signupEpic: Epic = (
   action: Observable<SignUpAction>,
   _state,
-  { client }: EpicDependencies
+  { client }: EpicDependencies,
 ) => {
   return action.pipe(
     ofType(SIGN_UP),
@@ -24,7 +24,7 @@ export const signupEpic: Epic = (
               username: currentAction.payload.username,
             },
           },
-        })
+        }),
       ).pipe(
         map((response) => {
           return {
@@ -36,13 +36,13 @@ export const signupEpic: Epic = (
             },
           };
         }),
-        delay(500)
+        delay(500),
       );
     }),
     catchError((_error) => {
       return Promise.resolve({
         type: SIGN_UP_FAILURE,
       });
-    })
+    }),
   );
 };

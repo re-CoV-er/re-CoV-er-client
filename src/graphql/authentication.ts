@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const signUp = gql`
   mutation SignUp($signInInput: SignInInput!) {
@@ -14,4 +14,4 @@ export const logIn = gql`
       accessToken
     }
   }
-  `;
+`;

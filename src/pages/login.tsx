@@ -11,14 +11,14 @@ import { AuthenticationState } from '../redux/reducers/authentication';
 type OwnProps = RouteComponentProps;
 
 type StateProps = {
-  authentication: AuthenticationState
+  authentication: AuthenticationState;
 };
 
 interface DispatchProps {
-  logIn: (username: string, password: string) => void
+  logIn: (username: string, password: string) => void;
 }
 
-type Props = StateProps & DispatchProps & OwnProps
+type Props = StateProps & DispatchProps & OwnProps;
 
 const Container = styled.div`
   display: flex;
@@ -27,21 +27,21 @@ const Container = styled.div`
 `;
 
 const Login: FC<Props> = (props) => {
-
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setPassword(event.target.value)
+    setPassword(event.target.value);
   };
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setUsername(event.target.value)
+    setUsername(event.target.value);
   };
 
-
-  useEffect(() => { props.authentication.loggedIn && navigate("/profile") })
+  useEffect(() => {
+    props.authentication.loggedIn && navigate('/profile');
+  });
 
   return (
     <Container>
@@ -59,24 +59,30 @@ const Login: FC<Props> = (props) => {
         margin="normal"
         type="password"
         onChange={handlePasswordChange}
-
       />
       <br />
 
-      <Button variant="contained" color="primary" onClick={() => {
-        props.logIn(username, password)
-      }}>
-        {props.authentication.loading ? "loading" : "Login"}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          props.logIn(username, password);
+        }}
+      >
+        {props.authentication.loading ? 'loading' : 'Login'}
       </Button>
     </Container>
-  )
+  );
 };
 
 const mapStateToProps = (state: StateProps): StateProps => state;
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   logIn(username, password) {
-    dispatch(authentication.logIn({ username, password }))
-  }
-})
+    dispatch(authentication.logIn({ username, password }));
+  },
+});
 
-export default connect<StateProps, DispatchProps, OwnProps, StateProps>(mapStateToProps, mapDispatchToProps)(Login)
+export default connect<StateProps, DispatchProps, OwnProps, StateProps>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Login);
