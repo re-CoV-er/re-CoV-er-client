@@ -10,7 +10,7 @@ import Login from './pages/login';
 import Profile from './pages/profile';
 import client from './graphql/client';
 
-import GlobalStylesProvider from "./fonts/fonts";
+import GlobalStylesProvider from './fonts/fonts';
 
 const App = () => {
   return (

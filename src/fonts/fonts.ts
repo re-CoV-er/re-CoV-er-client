@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-import Viminalis from "./Viminalis.woff";
-import Viminalis2 from "./Viminalis.woff2";
+import Viminalis from './Viminalis.woff';
+import Viminalis2 from './Viminalis.woff2';
 
 export default createGlobalStyle`
     @font-face {
