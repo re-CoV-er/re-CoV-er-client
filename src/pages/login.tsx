@@ -71,6 +71,7 @@ const Login: FC<Props> = (props) => {
       >
         {props.authentication.loading ? 'loading' : 'Login'}
       </Button>
+      {props.authentication.displayError && <p>Error: No user with these credentials found</p>}
     </Container>
   );
 };

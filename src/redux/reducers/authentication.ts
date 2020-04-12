@@ -16,6 +16,7 @@ interface UserDetails {
 export interface AuthenticationState {
   loading: boolean;
   loggedIn: boolean;
+  displayError: boolean;
   userDetails?: UserDetails;
   accessToken?: string;
 }
@@ -23,6 +24,7 @@ export interface AuthenticationState {
 const initialState: AuthenticationState = {
   loading: false,
   loggedIn: false,
+  displayError: false,
 };
 
 export const authentication = (
@@ -44,6 +46,7 @@ export const authentication = (
       return {
         loading: false,
         loggedIn: false,
+        displayError: true,
       };
     case LOG_IN:
       return { ...state, loading: true };
@@ -59,6 +62,7 @@ export const authentication = (
       return {
         loading: false,
         loggedIn: false,
+        displayError: true,
       };
     default:
       return { ...state };
