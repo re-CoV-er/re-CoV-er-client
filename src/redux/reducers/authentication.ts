@@ -49,12 +49,14 @@ export const authentication = (
         displayError: true,
       };
     case LOG_IN:
-      return { ...state, loading: true };
+      console.log('in reducer');
+      return { ...state, displayError: false, loading: true };
     case LOG_IN_SUCCESS:
       return {
         ...state,
         loading: false,
         loggedIn: true,
+        displayError: false,
         accessToken: action.payload.accessToken,
         userDetails: action.payload.userDetails,
       };
