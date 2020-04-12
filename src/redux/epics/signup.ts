@@ -37,12 +37,12 @@ export const signupEpic: Epic = (
           };
         }),
         delay(500),
+        catchError((_error) => {
+          return Promise.resolve({
+            type: SIGN_UP_FAILURE,
+          });
+        }),
       );
-    }),
-    catchError((_error) => {
-      return Promise.resolve({
-        type: SIGN_UP_FAILURE,
-      });
     }),
   );
 };
