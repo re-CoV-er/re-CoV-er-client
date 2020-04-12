@@ -49,6 +49,14 @@ const Login: FC<Props> = (props) => {
     setUsername(event.target.value);
   };
 
+  const handleSubmit = () => {
+    if (password.length < 8) {
+      setValidPassword(false);
+    } else {
+      props.logIn(username, password);
+    }
+  };
+
   useEffect(() => {
     props.authentication.loggedIn && navigate('/profile');
   });
@@ -73,17 +81,7 @@ const Login: FC<Props> = (props) => {
       />
       <br />
 
-      <Button
-        variant="text"
-        color="primary"
-        onClick={() => {
-          if (password.length < 8) {
-            setValidPassword(false);
-          } else {
-            props.logIn(username, password);
-          }
-        }}
-      >
+      <Button variant="text" color="primary" onClick={handleSubmit}>
         {props.authentication.loading ? 'loading' : 'Login'}
       </Button>
       {!validPassword ? (

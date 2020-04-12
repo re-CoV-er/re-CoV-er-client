@@ -33,12 +33,13 @@ export const authentication = (
 ) => {
   switch (action.type) {
     case SIGN_UP:
-      return { ...state, loading: true };
+      return { ...state, loading: true, displayError: false };
     case SIGN_UP_SUCCESS:
       return {
         ...state,
         loading: false,
         loggedIn: true,
+        displayError: false,
         accessToken: action.payload.accessToken,
         userDetails: action.payload.userDetails,
       };
@@ -49,7 +50,6 @@ export const authentication = (
         displayError: true,
       };
     case LOG_IN:
-      console.log('in reducer');
       return { ...state, displayError: false, loading: true };
     case LOG_IN_SUCCESS:
       return {
