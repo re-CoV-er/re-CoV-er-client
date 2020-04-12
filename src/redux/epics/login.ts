@@ -14,6 +14,7 @@ export const loginEpic: Epic = (
   return action.pipe(
     ofType(LOG_IN),
     mergeMap((currentAction: LogInAction) => {
+      console.log('in login pipe');
       return from(
         client.query<{ logIn: { accessToken: string } }>({
           query: logIn,
@@ -26,7 +27,7 @@ export const loginEpic: Epic = (
         }),
       ).pipe(
         map((response) => {
-          if (response?.errors?.[0].message === "Unauthorized") {
+          if (response?.errors?.[0].message === 'Unauthorized') {
             throw new Error();
           }
           return {
@@ -40,6 +41,7 @@ export const loginEpic: Epic = (
       );
     }),
     catchError((_error) => {
+      console.log('error');
       return Promise.resolve({
         type: LOG_IN_FAILURE,
       });
