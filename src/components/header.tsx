@@ -9,6 +9,7 @@ const Heading = styled.h1`
   background-color: seagreen;
   border: 2px solid black;
   cursor: pointer;
+  font-family: 'Viminalis';
 `;
 
 const StyledLink = styled(Link)`

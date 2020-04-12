@@ -10,6 +10,8 @@ import Login from './pages/login';
 import Profile from './pages/profile';
 import client from './graphql/client';
 
+import GlobalStylesProvider from './fonts/fonts';
+
 const App = () => {
   return (
     <Redux store={store}>
@@ -20,6 +22,7 @@ const App = () => {
           <Login path="/login" />
           <Profile path="/profile" />
         </Router>
+        <GlobalStylesProvider />
       </Apollo>
     </Redux>
   );
