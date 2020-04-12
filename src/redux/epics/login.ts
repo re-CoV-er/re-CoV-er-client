@@ -26,6 +26,9 @@ export const loginEpic: Epic = (
         }),
       ).pipe(
         map((response) => {
+          if (response?.errors?.[0].message === "Unauthorized") {
+            throw new Error();
+          }
           return {
             type: LOG_IN_SUCCESS,
             payload: {
