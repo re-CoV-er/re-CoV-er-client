@@ -12,7 +12,7 @@ describe('authentication', () => {
     expect(state).toEqual({
       loading: false,
       loggedIn: false,
-      displayError: false,
+      displayError: true,
     });
   });
 });
