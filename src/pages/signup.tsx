@@ -102,6 +102,7 @@ const Signup: FC<Props> = (props) => {
         </ErrorContainer>
       ) : props.authentication.displayError ? (
         <ErrorContainer>
+          {/* FIXME use error messages from backend */}
           <ErrorMessage message="A user already exists with this username or email. Please try again" />
         </ErrorContainer>
       ) : null}
@@ -111,7 +112,7 @@ const Signup: FC<Props> = (props) => {
 
 const mapStateToProps = (state: StateProps): StateProps => state;
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  signUp(username, email, password) {
+  signUp(username, email, password): void {
     dispatch(authentication.signUp({ username, email, password }));
   },
 });
