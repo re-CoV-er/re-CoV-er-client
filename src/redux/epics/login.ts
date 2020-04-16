@@ -25,21 +25,19 @@ export const loginEpic: Epic = (
           },
         }),
       ).pipe(
-        map((response) => {
-          return {
-            type: LOG_IN_SUCCESS,
-            payload: {
-              accessToken: response.data?.logIn?.accessToken,
-            },
-          };
-        }),
+        map((response) => ({
+          type: LOG_IN_SUCCESS,
+          payload: {
+            accessToken: response.data?.logIn?.accessToken,
+          },
+        })),
         delay(500),
+        catchError((_error) => {
+          return Promise.resolve({
+            type: LOG_IN_FAILURE,
+          });
+        }),
       );
-    }),
-    catchError((_error) => {
-      return Promise.resolve({
-        type: LOG_IN_FAILURE,
-      });
     }),
   );
 };

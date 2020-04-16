@@ -16,6 +16,7 @@ interface UserDetails {
 export interface AuthenticationState {
   loading: boolean;
   loggedIn: boolean;
+  displayError: boolean;
   userDetails?: UserDetails;
   accessToken?: string;
 }
@@ -23,6 +24,7 @@ export interface AuthenticationState {
 const initialState: AuthenticationState = {
   loading: false,
   loggedIn: false,
+  displayError: false,
 };
 
 export const authentication = (
@@ -31,12 +33,13 @@ export const authentication = (
 ) => {
   switch (action.type) {
     case SIGN_UP:
-      return { ...state, loading: true };
+      return { ...state, loading: true, displayError: false };
     case SIGN_UP_SUCCESS:
       return {
         ...state,
         loading: false,
         loggedIn: true,
+        displayError: false,
         accessToken: action.payload.accessToken,
         userDetails: action.payload.userDetails,
       };
@@ -44,14 +47,16 @@ export const authentication = (
       return {
         loading: false,
         loggedIn: false,
+        displayError: true,
       };
     case LOG_IN:
-      return { ...state, loading: true };
+      return { ...state, displayError: false, loading: true };
     case LOG_IN_SUCCESS:
       return {
         ...state,
         loading: false,
         loggedIn: true,
+        displayError: false,
         accessToken: action.payload.accessToken,
         userDetails: action.payload.userDetails,
       };
@@ -59,6 +64,7 @@ export const authentication = (
       return {
         loading: false,
         loggedIn: false,
+        displayError: true,
       };
     default:
       return { ...state };

@@ -5,6 +5,7 @@ import { ofType, Epic } from 'redux-observable';
 import { SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from '../constants';
 import { signUp } from '../../graphql/authentication';
 import { EpicDependencies } from '../store';
+import { ExecutionResult, GraphQLError } from 'graphql';
 
 export const signupEpic: Epic = (
   action: Observable<SignUpAction>,
@@ -26,23 +27,30 @@ export const signupEpic: Epic = (
           },
         }),
       ).pipe(
-        map((response) => {
-          return {
+        map(
+          (
+            response: ExecutionResult<{
+              createUser?: { accessToken?: string };
+            }>,
+          ) => ({
             type: SIGN_UP_SUCCESS,
             payload: {
-              accessToken: response.data?.createUser.accessToken,
+              accessToken: response.data?.createUser?.accessToken,
               loading: false,
               loggedIn: true,
             },
-          };
-        }),
+          }),
+        ),
         delay(500),
+        catchError((_error?: GraphQLError) => {
+          return Promise.resolve({
+            type: SIGN_UP_FAILURE,
+            payload: {
+              errorMessage: 'any error message', // FIXME add message from backend
+            },
+          });
+        }),
       );
-    }),
-    catchError((_error) => {
-      return Promise.resolve({
-        type: SIGN_UP_FAILURE,
-      });
     }),
   );
 };

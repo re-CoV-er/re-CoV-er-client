@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { authentication } from '../redux/action-creators';
 import { Dispatch } from 'redux';
 import { AuthenticationState } from '../redux/reducers/authentication';
+import { ErrorMessage } from '../components/error-message';
 
 type OwnProps = RouteComponentProps;
 
@@ -24,19 +25,36 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: green;
+`;
+
+const ErrorContainer = styled.div`
+  margin: 2rem 0;
 `;
 
 const Login: FC<Props> = (props) => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [validPassword, setValidPassword] = useState(true);
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
+    if (!validPassword) {
+      setValidPassword(true);
+    }
     setPassword(event.target.value);
   };
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setUsername(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (password.length < 8) {
+      setValidPassword(false);
+    } else {
+      props.logIn(username, password);
+    }
   };
 
   useEffect(() => {
@@ -54,6 +72,7 @@ const Login: FC<Props> = (props) => {
         onChange={handleUsernameChange}
       />
       <TextField
+        error={!validPassword}
         id="password"
         label="Password"
         margin="normal"
@@ -62,15 +81,18 @@ const Login: FC<Props> = (props) => {
       />
       <br />
 
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          props.logIn(username, password);
-        }}
-      >
+      <Button variant="text" color="primary" onClick={handleSubmit}>
         {props.authentication.loading ? 'loading' : 'Login'}
       </Button>
+      {!validPassword ? (
+        <ErrorContainer>
+          <ErrorMessage message="The password must contain minimum 8 characters." />
+        </ErrorContainer>
+      ) : props.authentication.displayError ? (
+        <ErrorContainer>
+          <ErrorMessage message="Unknown credentials. Please try again" />
+        </ErrorContainer>
+      ) : null}
     </Container>
   );
 };

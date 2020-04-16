@@ -69,6 +69,8 @@ export const Landing: FC<LandingProps> = () => {
       </p>
 
       <Link to="/signup">Go to Signup</Link>
+      <br />
+      <Link to="/login">Go to Login</Link>
     </TypoH1>
   );
 };

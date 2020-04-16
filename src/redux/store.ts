@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Store } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import ApolloClient from 'apollo-client';
@@ -16,7 +16,7 @@ const epicMiddleware = createEpicMiddleware({
   dependencies: { client },
 });
 
-export function configureStore() {
+export function configureStore(): Store {
   const composedEnhancers = composeWithDevTools(
     applyMiddleware(epicMiddleware),
   );
